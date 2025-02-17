@@ -1,0 +1,50 @@
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-md-8 mx-auto text-center">
+        <!-- SI FUNCIONA SOY UNA LOCURA -->
+        <svg width="200" height="300" class="mb-4">
+          <circle [style.display]="errors >= 1 ? 'block' : 'none'" cx="150" cy="120" r="20" fill="black" />
+          <line [style.display]="errors >= 2 ? 'block' : 'none'" x1="150" y1="140" x2="150" y2="200" stroke="black" />
+          <line [style.display]="errors >= 3 ? 'block' : 'none'" x1="150" y1="150" x2="130" y2="180" stroke="black"/>
+          <line [style.display]="errors >= 4 ? 'block' : 'none'" x1="150" y1="150" x2="170" y2="180" stroke="black" />
+          <line [style.display]="errors >= 5 ? 'block' : 'none'" x1="150" y1="200" x2="130" y2="240" stroke="black" />
+          <line [style.display]="errors >= 6 ? 'block' : 'none'" x1="150" y1="200" x2="170" y2="240" stroke="black" />
+        </svg>
+
+        <h2 class="mb-4">
+          <span *ngFor="let letter of displayWord" class="mx-1">
+            {{letter}}
+          </span>
+        </h2>
+
+        <div class="mb-4" *ngIf="wrongLetters.length > 0">
+          <p>Letras incorrectas:</p>
+          <span *ngFor="let letter of wrongLetters" class="mx-1">
+            {{letter}}
+          </span>
+        </div>
+
+        <div class="mb-4">
+          <button 
+            *ngFor="let letter of alphabet" 
+            class="btn btn-outline-primary m-1"
+            (click)="guessLetter(letter)"
+            [disabled]="usedLetters.includes(letter)"
+          >
+            {{letter}}
+          </button>
+        </div>
+
+        <div *ngIf="gameStatus !== 'playing'" class="alert" 
+             [ngClass]="{'alert-success': gameStatus === 'won', 'alert-danger': gameStatus === 'lost'}">
+          <p *ngIf="gameStatus === 'won'">¡Felicitaciones! Has ganado.</p>
+          <p *ngIf="gameStatus === 'lost'">Game Over. La palabra era: {{currentWord}}</p>
+          <button class="btn btn-primary" (click)="newGame()">Jugar de nuevo</button>
+        </div>
+
+        <div class="mt-4">
+          <p>Intentos restantes: {{6 - errors}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
