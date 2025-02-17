@@ -19,7 +19,7 @@ export class GameComponent implements OnInit, OnDestroy {
   wrongLetters: string[] = [];
   errors: number = 0;
   gameStatus: 'playing' | 'won' | 'lost' = 'playing';
-  alphabet: string[] = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split('');
+  alphabet: string[] = 'AÁBCDEÉFGHIÍJKLMNÑOÓPQRSTUÚVWXYZ'.split('');
 
   private gameSubscription?: Subscription;
 
